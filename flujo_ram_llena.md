@@ -1,9 +1,50 @@
-# Principios de Programación
-4 entregas · trabajo individual · ≤ 14 h cada una
+# Flujo: Abrir programa pesado con RAM al 90%
 
-*UTEC · UTU · Facultad de Ingeniería — UdelaR*
+```
+┌─────────────────────────────────────────────────────────────┐
+│ Usuario intenta abrir programa pesado (RAM: 90%)            │
+└────────────────────┬────────────────────────────────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │ SO verifica RAM disponible │
+        │ (solo ~10% libre)          │
+        └────────────┬───────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │ Activa paginación/swap     │
+        │ (traslada datos a disco)   │
+        └────────────┬───────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │ Programa se carga lento    │
+        │ (disco es más lento)       │
+        └────────────┬───────────────┘
+                     │
+                     ▼
+        ┌────────────────────────────┐
+        │ Sistema se ralentiza       │
+        │ (thrashing)                │
+        └────────────────────────────┘
+```
 
-### Tabla Comparativa: Registros vs RAM vs Disco
+## Explicación (5 líneas)
+
+1. **Detección:** El SO detecta que solo hay ~10% de RAM libre y no puede cargar el programa completamente en memoria.
+
+2. **Paginación:** Activa el mecanismo de swap, moviendo datos menos usados de RAM al disco duro para liberar espacio.
+
+3. **Carga lenta:** El programa se carga, pero parte de sus datos están en disco, lo que ralentiza el acceso (disco es 100-1000x más lento que RAM).
+
+4. **Thrashing:** Si el programa necesita acceder frecuentemente a datos en swap, el sistema entra en "thrashing": constantemente mueve datos entre RAM y disco.
+
+5. **Resultado:** La experiencia es muy lenta; el sistema puede volverse casi inutilizable hasta que se libere RAM cerrando otras aplicaciones.
+
+---
+
+## Tabla Comparativa: Registros vs RAM vs Disco
 
 | Característica | Registros | RAM | Disco |
 |---|---|---|---|
@@ -11,57 +52,3 @@
 | **Latencia** | ~1 ns | ~100 ns | ~10 ms |
 | **Costo por GB** | $1000+ | $5-10 | $0.02-0.05 |
 | **Ejemplo de uso** | Variables locales, índices de bucles | Programas en ejecución, datos activos | Almacenamiento persistente, archivos |
-
----
-
-### Flujo: Abrir programa pesado con RAM al 90%
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│     Usuario intenta abrir programa pesado (RAM: 90%)        │
-└────────────────────┬────────────────────────────────────────┘
-                     │
-                     ▼
-        ┌────────────────────────────┐
-        │ SO verifica RAM disponible │
-        │ *(solo 10% libre)*         │
-        └────────────┬───────────────┘
-                     │
-                     ▼
-        ┌────────────────────────────┐
-        │ Activa paginación/swap     │
-        │ *(traslada datos a disco)* │
-        └────────────┬───────────────┘
-                     │
-                     ▼
-        ┌────────────────────────────┐
-        │ Programa se carga lento    │
-        │ *(disco es más lento)*     │
-        └────────────┬───────────────┘
-                     │
-                     ▼
-        ┌────────────────────────────┐
-        │ Sistema se ralentiza       │
-        │ *(thrashing)*              │
-        └────────────────────────────┘
-```
-
-#### Explicación
-
-1. **Detección:** El SO detecta que solo hay cerca de 10% de RAM libre y no puede cargar el programa completamente en memoria.
-
-2. **Paginación:** Activa el mecanismo de swap, moviendo datos menos usados de RAM al disco duro para liberar espacio.
-
-3. **Carga lenta:** El programa se carga, pero parte de sus datos están en disco, lo que ralentiza el acceso (disco es 100-1000x más lento que RAM).
-
-4. **Thrashing:** Si el programa necesita acceder frecuentemente a datos en swap, el sistema entra en *thrashing*: constantemente mueve datos entre RAM y disco.
-
-5. **Resultado:** La experiencia es muy lenta; el sistema puede volverse casi inutilizable hasta que se libere RAM cerrando otras aplicaciones.
-
----
-
-
-### ENTREGA 01 - Setup + Arquitectura + Tipos
-
-- Captura del entorno: archivo setup.png
-- Ficha personal en C: entrega-01/ficha_personal.c

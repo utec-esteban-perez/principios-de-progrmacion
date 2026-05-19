@@ -8,6 +8,6 @@ int main(void) {
     printf("  - Automatizás tareas repetitivas\n");
     printf("  - Convertís ideas en productos reales\n");
     printf("  - Desarrollás pensamiento lógico y resolución de problemas\n\n");
-    printf("Pregunta: ¿seguirá siendo necesario programar?\n\n");
+    printf("Pregunta: ¿Seguirá siendo necesario saber programar?\n\n");
     return 0;
 }
