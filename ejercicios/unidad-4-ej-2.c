@@ -3,7 +3,7 @@
 int main() {
     int n;
     int arr[100] = {0};
-    int total, suma, promedio, max, min;
+    int total = 1, suma = 0, promedio = 0, max = 0, min = 0;
 
     printf("Ingrese n: ");
     scanf("%d", &n);
@@ -17,7 +17,7 @@ int main() {
 
     while (n != 0)
     {
-        printf("Ingrese otro valor o 0 para terminar: ");
+        printf("Ingrese un valor o 0 para terminar: ");
         scanf("%d", &n);
         if (n != 0) {
             arr[n]++; // incrementa el contador para el número ingresado
