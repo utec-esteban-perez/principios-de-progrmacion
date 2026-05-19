@@ -7,8 +7,18 @@ int main(void) {
     printf("Ingresa peso (kg): ");
     scanf("%lf", &peso);
 
+    if (peso < 1) {
+        printf("El peso no puede ser menor o igual a 0\n");
+        return 1;
+    }
+
     printf("Ingresa altura (m): ");
     scanf("%lf", &altura);
+
+    if (altura < 1) {
+        printf("La altura no puede ser menor o igual a 0\n");
+        return 1;
+    }
 
     imc = peso / (altura * altura);
 
