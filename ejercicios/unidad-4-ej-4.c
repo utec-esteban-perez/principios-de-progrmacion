@@ -1,12 +1,24 @@
 #include <stdio.h>
 
 int main() {
-    int n;
-    printf("Ingrese un número: ");
+    int n, sum, digit;
+    printf("Ingrese un entero positivo: ");
     scanf("%d", &n);
-    int digito = n % 10;
-    printf("El último dígito de %d es: %d\n", n, digito);
 
-    
+    while (n >= 10) {
+        sum = 0;
+        printf("Sumando los dígitos de %d: ", n);
+        
+        while (n > 0) {
+            digit = n % 10;
+            sum += digit;
+            n /= 10;
+        }
+        
+        printf("%d\n", sum);
+        n = sum;
+    }
+
+    printf("La raíz digital es: %d\n", n);
     return 0;
 }
