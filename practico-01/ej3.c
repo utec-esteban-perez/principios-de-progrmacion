@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int main() {
+int main(void) {
     float precio1, precio2, precio3;
     float propina, descuento;
     int comensales;
