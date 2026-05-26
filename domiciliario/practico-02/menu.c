@@ -1,6 +1,53 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
+void tablaMultiplicar(int n) {
+    printf("Tabla de multiplicar del %d:\n", n);
+    for (int i = 1; i <= 10; i++) {
+        printf("%d x %d = %d\n", n, i, n*i);
+    }
+}
+
+int esPrimo(int n) {
+    int is_prime = 1;
+    
+    for (int i = 2; i * i <= n; i++) {
+        if (n % i == 0) {
+            is_prime = 0;
+            break;
+        }
+    }
+    
+    if (is_prime) {
+        return 0; // Es primo
+    } else {
+        return 1; // No es primo
+    }
+}
+
+int sumaDigitos(int n) {
+    int sum = 0;
+    int num = n;
+    while (num != 0) {     // repite mientras queden digitos
+        sum += num % 10;   // extrae el ultimo digito y lo suma
+        num /= 10;         // "borra" el último digito
+    }
+    return sum;
+}
+
+void triangulo(int h) {
+    int i, j;
+    for(i = 1; i <= h; i++) {
+        for(j = 1; j <= i; j++) {
+            printf("* ");
+        }
+            printf("\n");
+        }
+}
+    
 int main(void) {
+    srand(time(NULL));
     int option;
     int state = 1;
     int n;
@@ -37,11 +84,8 @@ int main(void) {
                     printf("Error, ingrese un numero del 1 al 12.\n");
                     while (getchar() != '\n');
                     continue;
-                }
-                printf("Tabla de multiplicar del %d:\n", n);
-                for (int i = 1; i <= 10; i++) {
-                    printf("%d x %d = %d\n", n, i, n*i);
-                }
+                }    
+                tablaMultiplicar(n);
                 break;
             // ES PRIMO?
             case 2:
@@ -55,21 +99,10 @@ int main(void) {
                     printf("Debe ingresar un numero mayor o igual a 2.\n");
                 } else {
                     while (getchar() != '\n');
-                    int is_prime = 1;
-                    int divisor = 0;
-                    
-                    for (int i = 2; i * i <= n; i++) {
-                        if (n % i == 0) {
-                            is_prime = 0;
-                            divisor = i;
-                            break;
-                        }
-                    }
-                    
-                    if (is_prime) {
-                        printf("%d es PRIMO.\n", n);
+                    if (esPrimo(n) == 0) {
+                        printf("%d es primo.\n", n);
                     } else {
-                        printf("%d NO es primo (primer divisor: %d).\n", n, divisor);
+                        printf("%d no es primo.\n", n);
                     }
                 }
                 break;
@@ -81,13 +114,7 @@ int main(void) {
                     printf("Error: entrada inválida.\n");
                 } else {
                     while (getchar() != '\n');
-                    int sum = 0;
-                    int num = n;
-                    while (num != 0) {     // repite mientras queden dígitos
-                        sum += num % 10;   // extrae el último dígito y lo suma
-                        num /= 10;         // "borra" el último dígito
-                    }
-                    printf("La suma de los digitos de %d es: %d\n", n, sum);
+                    printf("La suma de los digitos de %d es: %d\n", n, sumaDigitos(n));
                 }
                 break;
             case 4:
@@ -97,15 +124,41 @@ int main(void) {
                     printf("Error: entrada inválida.\n");
                 } else{
                     while (getchar() != '\n');
-                    for 
-                    // base
-                    for (int i = 0; i < 2*n-1; i++) {
-                        printf("*");
-                    }
+                    
                 }
                 break;
             case 5:
-                // adivinanza
+                char jugar = 's';
+                int veces = 5;
+                int intento;
+                int secreto = rand() % 20 + 1;
+
+                do {
+                    veces -= 1;
+                    printf("Adivina el número entre 1 y 20: ");
+                    if (scanf(" %d", &intento) != 1) {
+                        while (getchar() != '\n');
+                        printf("Error: entrada inválida.\n\n");
+                        continue;
+                    }
+                    if (intento == secreto) {
+                        while (getchar() != '\n');
+                        printf("Acertaste!!!\n");
+                        return 0;
+                    } else {
+                        while (getchar() != '\n');
+                        printf("No es el número %d \n", intento);
+                    }
+                    
+                    if (veces == 0) {
+                        break;
+                    }
+                    
+                    printf("¿Otra? (s/n): ");
+                    scanf(" %c", &jugar);
+                } while (jugar == 's' || jugar == 'S');
+                
+                printf("No acertaste esta vez. El número era %d\n", secreto);
                 break;
             default:
                 printf("Opcion invalida. Ingrese un numero entre el 0-5.\n");
