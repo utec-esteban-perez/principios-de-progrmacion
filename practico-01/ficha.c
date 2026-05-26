@@ -1,13 +1,13 @@
 #include <stdio.h>
 
 int main(void) {
-    printf("Nombre: Esteban Pérez\n");
-    printf("Tecnólogo Informática - UTEC\n");
+    printf("Nombre: Esteban Perez\n");
+    printf("TecnOlogo InformAtica - UTEC\n");
     printf("Sistema operativo: Ubuntu\n\n");
     printf("3 razones para programar\n");
-    printf("  - Automatizás tareas repetitivas\n");
-    printf("  - Convertís ideas en productos reales\n");
-    printf("  - Desarrollás pensamiento lógico y resolución de problemas\n\n");
-    printf("Pregunta: ¿Seguirá siendo necesario saber programar?\n\n");
+    printf("  - AutomatizAs tareas repetitivas\n");
+    printf("  - ConvertIs ideas en productos reales\n");
+    printf("  - DesarrollAs pensamiento lógico y resolución de problemas\n\n");
+    printf("Pregunta: ¿SeguirA siendo necesario saber programar?\n\n");
     return 0;
 }

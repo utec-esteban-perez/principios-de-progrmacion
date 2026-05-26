@@ -2,11 +2,11 @@
 
 int main(void) {
     int n;
-    printf("Ingresa un número (0-255): ");
+    printf("Ingresa un nUmero (0-255): ");
     scanf("%d", &n);
 
     if (n < 0 || n > 255) {
-        printf("Número fuera de rango\n");
+        printf("NUmero fuera de rango\n");
         return 1;
     }
 
